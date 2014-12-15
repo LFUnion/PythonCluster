@@ -1,4 +1,4 @@
-python_cluster
+Python Cluster
 ==============
 
 Python Cluster is a script to setup and run a computer cluster, initiated by Leon Schwalb and Fabian Stein and published under the terms of GPL.
