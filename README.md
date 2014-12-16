@@ -19,6 +19,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/.
 
 
 WARNING:
-Its not recommended to open port 10008 in your firewall or router.
+It's not recommended to open port 10008 in your firewall or router.
 There are many security leaks in the cluster server, which uses port 10008. 
 
