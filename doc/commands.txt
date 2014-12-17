@@ -1,0 +1,24 @@
+Check https://github.com/clusterag/python_cluster/wiki/Commands for the latest documentation
+
+The list of all available commands in ClusterShell:
+
+Basic shell commands:
+
+last: Executes the last command
+last [Command #]: Executes the Command at the command number (Exmpl: last 1 executes the last command)
+last history: Shows the history of commands
+clear: Clears the screen
+exit: Exit ClusterShell
+
+Cluster related commands:
+
+load: Loads the network configuration
+clusterinit: Initializes the cluster configuration
+clustercheck: Checks the server´s for basic functionality
+clustertestprog: Checks the cluster for networking
+clusterdelete: Deletes the cluster configuration
+
+Other commands:
+
+connect [host] [port] [message]: Sends a message to a cluster server and waits for the result (Exmpl: connect localhost 10008 1+1)
+prime [host] [port] [Max. Prime]: Calculates primes on a server and waits for the result (Exmpl: prime localhost 10008 100)

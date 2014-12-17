@@ -1,0 +1,11 @@
+Check https://github.com/clusterag/python_cluster/wiki/Quick-Start for the latest documentation
+
+Welcome to the quick start guide
+
+1. Start the client by executing: cd client/ ; python3 ui.py
+2. In the client (ClusterShell), you should see a cursor (>). You can type commands there, like in the bash.
+3. Let´s start by setting up the cluster. Simply type clusterinit. You will be asked for the number of servers in you cluster network. Type 1 if you only test this with a server running on localhost. Then you have to type in the IP´s of your servers. Type in localhost.
+4. Now its time to start the server. Open a new terminal window and type in cd server ; python3 startServer.py. You will be asked for a password to stop the server, but if you are running the server only on localhost, this isn´t necessary. If the server returns "Waiting for a connection...", he has successfully started and is listening on port 10008.
+5. Back in the ClusterShell, type clustercheck. The program should return Server localhost OK. If not, you have done something wrong. If so, try to reconfigure the cluster with clusterdelete and repeat from step 3.
+6. OK, now your cluster (Not yet a really cluster, it´s only one machine, but you can add as much as you wish) is set up and checked. In ClusterShell is a program to test the client´s and server´s network capacitys. Type in clustertestprog, then wait. This can take a while, depending on your machine´s specifications. When it has finished, a bunch of numbers should appear in the ClusterShell. This means everything is OK and you can start adding more servers with clusterinit.
+7. You can now calculate what you want to calculate with your cluster, check the Commands wiki page for programs. REMEMBER: After adding cluster servers, always check the functionality of them with clustercheck!
