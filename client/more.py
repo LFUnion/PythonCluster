@@ -2,7 +2,7 @@
 
 # Here you can import your program like:
 # import program
-import client, browserauth, ClusterAPI, clustertestprog, egg
+import client, ClusterAPI, clustertestprog, egg
 
 """
 Module "more.py", for easy program imports.
