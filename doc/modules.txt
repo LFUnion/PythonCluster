@@ -1,0 +1,29 @@
+Check https://github.com/clusterag/python_cluster/wiki/Modules-Documentation for the latest documentation
+
+Welcome to the Modules Documentation
+
+You find informations about the module´s functions here. If you want to write your own cluster program, go to Writing a cluster program.
+
+
+client.py
+
+The module "client" has only one function, connect. You call it: client.connect([host],[port], [message]. As example: client.connect(localhost, 10008, 1+1)
+DO NOT use this module in a top-level program, the ClusterAPI is written for top-level programs.
+client.py can ONLY interact with the startServer.py script in this repository!
+
+
+server.py
+
+The module "server" provides higher-level server functions. Functions:
+
+server.init([port], [maxConnections]): Returns a server thats already listening and set up.
+server.acceptConnections([server]): Waits for a connection on the specified server. It returns a connection object.
+server.receive([connection]): Receives data on the specified connection. Returns the decoded data.
+server.send([connection], [data], [isEncoded]): Sends data on the specified connection and encodes the data if it isn´t already encoded.
+
+
+primes.py
+
+The module "primes" can calculate primes. Function:
+
+primes.prime([maxNumber]): Calculates primes from 0 to maxNumber, returns a list with the found primes.

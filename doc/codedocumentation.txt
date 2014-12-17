@@ -1,0 +1,19 @@
+Check https://github.com/clusterag/python_cluster/wiki/Code-Documentation for the latest documentation
+
+Welcome to the Code Documentation
+If you want to take a look behind the scenes, you´re at the right place.
+
+
+Code Style
+
+We are using modules instead of putting all together in one giant script. Most modules can be recycled for future projects, only a few not.
+
+
+Client-Server Communication
+
+The data has to be transferred from the client to the server and back. We use self written modules to communicate, so we can use top-level functions in our top-level scripts. The loop:
+
+The client sends the server the command
+The server executes the command and sends TCP chunks with the result back to the client
+The client is receiving the data in 8192kB chunks
+The client is putting the chunks into a final string
