@@ -1,0 +1,37 @@
+Check https://github.com/clusterag/python_cluster/wiki/Writing-a-cluster-program for the latest documentation
+
+Welcome to the cluster program writing introduction
+
+Note: This is NOT a beginner tutorial how to write your first python script. This How To requires basic python skills.
+
+First, you´ll get an introduction to ClusterAPI, then you will learn how to use threading to run more then one function at the same time. Finally, you´ll learn how to integrate your program into ClusterShell and test it. It´s recommended that you read the Code Documentation first.
+
+ClusterAPI
+
+The ClusterAPI is a simple API to control the cluster (set up in ClusterShell) in your program. You have to import "ClusterAPI". Then you have access to the API functions:
+
+ClusterAPI.clustercheck(): Returns "true" when all cluster servers are functional.
+ClusterAPI.getClusterLenght(): Returns the number of cluster servers in the cluster.
+ClusterAPI.execute([server:int], [command:string], [highValue:int]): The main part of the ClusterAPI. You execute a (Python) command on the specified server and returns the result. The "server" variable can be a integer from 1 to the numbers of cluster servers in the cluster. Finally, set "highValue" to 1 if the result is too big to store in a single variable. Otherwise set it to 0.
+Threading
+
+You have learned how to use the ClusterAPI. You may have already started writing your program, but hold on a second: Look at the following code:
+
+import ClusterAPI
+result1 = ClusterAPI.execute(1, "1+1", 0)
+result2 = ClusterAPI.execute(2, "2+2", 0)
+result3 = ClusterAPI.execute(3, "3+3", 0)
+print(result1 + result2 + result3)
+
+The program would send server one the command and wait for the result to come back. But the other servers have no commands to execute, because the program waits for the result from server one. How can you fix this? One way is to use threading. The commands would be send simultaneously to server one, two and three, and the servers would run them simultaneously. This can be done by running a function in the thread and store the results in global variables. More information about threading can be found here: https://docs.python.org/3/library/_thread.html?highlight=_threading . Also check "clustertestprog.py" located in the "client/" folder for some example code.
+
+Integration
+
+You have your program finished and want to integrate it into ClusterShell? The module "more" is written for this. Just write the following code OVER the else branch:
+
+elif inp == "[yourcommand]":
+[yourprogram].[yourfunction]()
+return True
+The "inp" variable contains the command the user typed in in the ClusterShell. Then, in the elif statement, the module calls your function of your program. Finally, it returns True, which means the command has been successfully executed. Now save your work and test it. It´s recommended to turn the debug mode on by typing debug in the ClusterShell, this command toggles debugmode. Instead of "Internal Error", the ClusterShell will give you a traceback of the error.
+
+Congratulations to your first cluster ready program!
