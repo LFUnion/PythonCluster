@@ -2,7 +2,7 @@
 
 # Here you can import your program like:
 # import program
-import client, ClusterAPI, clustertestprog, egg
+import client, ClusterAPI, clustertestprog, massformula, egg
 
 """
 Module "more.py", for easy program imports.
@@ -44,6 +44,9 @@ def more(inp):
         return True
     elif inp == "clustertestprog":
         clustertestprog.start()
+        return True
+    elif inp == "formula":
+        massformula.main()
         return True
     elif inp == "thedevs":
         egg.egg()

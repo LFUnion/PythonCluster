@@ -96,8 +96,10 @@ def execute(clusterComputer, command, highValue):
 
     clusterLenght = len(clusterIndex)
 
+    get = ""
+
     if(clusterComputer > clusterLenght):
-        print("ERROR!")
+        get = "ERROR!"
 
     elif highValue == 1:
         get = highValueClient.connect(clusterIndex[(clusterComputer - 1)], 10008, command)
