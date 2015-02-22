@@ -4,6 +4,9 @@ Python Cluster
 Python Cluster is a script to setup and run a computer cluster.
 Copyright (c) 2014 Leon Schwalb and Fabian Stein.
 
+Although this is a Python3 script, you can compile it using GNU make and nuidka. You can find additional information at 
+the wiki page "Compiling ClusterShell"
+
 You can find documentation in the wiki or the doc/ folder.
 
 This program is free software: you can redistribute it and/or modify

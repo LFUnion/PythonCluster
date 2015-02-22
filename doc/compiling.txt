@@ -1,0 +1,10 @@
+Compiling ClusterShell
+
+Using nuitka (http://nuitka.net/) , a python compiler, you can compile the ClusterShell and the ClusterServer. This means the calculations are up to 250% faster than using the Python3 interpreter. It´s easy to compile PythonCluster if you use GNU make. A Makefile is in the root directory. Here´s a list of make targets:
+
+    make dependand: Nuitka will compile PythonCluster, but the executable still needs a Python3 runtime environment.
+    make standalone: The executable wo´nt need a Python3 environment, but the files are MUCH larger.
+    make gencode: Nuitka will only generate the C++ Code, so nothing will be compiled.
+    make clean: Cleans up the directory.
+
+It´s recommended to use dependand, unless your target system does´nt have a Python3 runtime environment.
