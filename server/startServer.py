@@ -44,7 +44,7 @@ while True:
             if get == "close" + str(pwd):
                 break
             if get:
-                if "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get:
+                if "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get:
                     result = eval(get)
                 else:
                     result = str(random.randint(11111111, 99999999))
