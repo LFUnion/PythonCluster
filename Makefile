@@ -17,6 +17,7 @@
 .SILENT:clean
 .SILENT:dependand
 .SILENT:standalone
+.SILENT:install_server
 .SILENT:gencode
 
 NUITKA = nuitka
@@ -91,6 +92,11 @@ gencode:
 	rmdir build/client/ui.build
 	mv build/server/startServer.build/* build/server/
 	rmdir build/server/startServer.build
+	echo "Done"
+	
+install_server:
+	echo "Installing server"
+	mv build/server/server /usr/bin/clusterserver
 	echo "Done"
 
 clean:
