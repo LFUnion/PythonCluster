@@ -1,8 +1,6 @@
-import client, highValueClient, FileOperations
-
 """
-The ClusterAPI
-Copyright (C) 2014  Leon Schwalb and Fabian Stein
+The ClusterAPI interface
+Copyright (C) 2015 Leon Schwalb and Fabian Stein
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,6 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+def com():
+    return [["clusterinit", "ClusterHelper.clusterinit()"], ["clusterdelete", "ClusterHelper.clusterdelete()"], ["clustercheck", "ClusterHelper.clustercheck()"]]
 
 def clusterinit():
     
@@ -75,34 +76,3 @@ def clustercheck():
 
     print("Done!")
     return success
-
-def getClusterLenght():
-
-    get = ""
-
-    clusterIndexRaw = FileOperations.readFile("clusterIndex.cli")
-
-    clusterIndex = clusterIndexRaw.split()
-
-    clusterLenght = len(clusterIndex)
-
-    return clusterLenght
-
-def execute(clusterComputer, command, highValue):
-
-    clusterIndexRaw = FileOperations.readFile("clusterIndex.cli")
-
-    clusterIndex = clusterIndexRaw.split()
-
-    clusterLenght = len(clusterIndex)
-
-    get = ""
-
-    if(clusterComputer > clusterLenght):
-        get = "ERROR!"
-
-    elif highValue == 1:
-        get = highValueClient.connect(clusterIndex[(clusterComputer - 1)], 10008, command)
-    else:
-        get = client.connect(clusterIndex[(clusterComputer - 1)], 10008, command)
-    return get

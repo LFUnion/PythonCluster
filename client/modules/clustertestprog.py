@@ -1,4 +1,5 @@
-import ClusterAPI, _thread
+import _thread
+from modules.API import ClusterAPI
 
 """
 Module "clustertestprog"
@@ -17,6 +18,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+def com():
+    return [["clustertestprog", "clustertestprog.start()"]]
 
 def bfl(counter, x):
     multiplicator = 99999

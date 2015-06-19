@@ -1,4 +1,8 @@
-import ClusterAPI, _thread, os
+import _thread, os
+from modules.API import ClusterAPI
+
+def com():
+    return [["massformula", "massformula.main()"]]
 
 formulas = []
 results = []

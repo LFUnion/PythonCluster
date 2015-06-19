@@ -23,10 +23,12 @@ def help():
     print("exit:        Exit the session")
     print("clear:       Clear screen")
     print("last:        Execute last command")
+    print("listmodules: Show the loaded modules")
     print("calculate:   Type in a formula")
     print("load:        Load the network standart configuration")
     print("prime:       Calculate primes")
     print("clusterhelp: Special help for the cluster programs")
+    print()
 
 def clusterhelp():
     print()

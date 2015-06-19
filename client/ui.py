@@ -1,8 +1,9 @@
-import client, os, more, calculate, primes, traceback, helpDoc
+import loader, client, os, traceback, helpDoc
+from modules import primes
 
 """
 ClusterShell, a program to control the Cluster
-Copyright (C) 2014  Leon Schwalb and Fabian Stein
+Copyright (C) 2015  Leon Schwalb and Fabian Stein
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,24 +38,28 @@ def load_cnfg():
 
 # The copyright
 def show_copyright():
-    print("(c) ClusterAG 2014.")
+    print("(c) ClusterAG 2015.")
     print("****************************************")
     print("ClusterShell is a simple program to")
     print("setup and control Clusters.")
 
 # Auto load configuration
 load_cnfg()
+# Initialize modules
+loader.load()
 # Clear screen
 os.system("clear")
 
 # Header
 print("Welcome to the ClusterShell")
 print("***************************")
-print("ClusterShell  Copyright (C) 2014  Leon Schwalb and Fabian Stein")
+print("ClusterShell  Copyright (C) 2015  Leon Schwalb and Fabian Stein")
 print()
 print("This program comes with ABSOLUTELY NO WARRANTY; for details type 'warranty'.")
 print("This is free software, and you are welcome to redistribute it")
 print("under certain conditions; type 'conditions' for details.")
+print()
+print("Loaded " + str(loader.getlen()) + " module(s)")
 print()
 
 # The command
@@ -100,7 +105,7 @@ while inp != "exit":
         # Insert last command
         lastCommand.insert(1, str(inp))
         
-        # The very basic commands, if you want to make yours, put it into "more.py".
+        # The very basic commands, if you want to make yours, put it into modules.
         
         # Help
         if inp == "help":
@@ -157,19 +162,17 @@ while inp != "exit":
             # Print "back" on screen (It's splitted)
             for i in back:
                 print(i)
-                
-        # The calculate function
-        elif inp == "calculate":
-            calculate.cal()
-            print("You are back in ClusterShell")
             
-        # Without words
+        # No comment
         elif inp == "clear":
             os.system("clear")
             
         # Copyright
         elif inp == "copyright":
             show_copyright()
+
+        elif inp == "listmodules":
+            loader.showmodules()
             
         # Enable / Disable the debug mode
         elif inp == "debug":
@@ -180,8 +183,7 @@ while inp != "exit":
                 debugMode = False
                 print("Debug Mode OFF")
                 
-        # Call more
-        elif not more.more(inp) and inp != "exit":
+        elif not loader.srch(inp) and inp != "exit":
             print("Unknown Command")
 
     # Exception stuff
