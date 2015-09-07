@@ -23,8 +23,10 @@ def com():
     return [["clustertestprog", "clustertestprog.start()"]]
 
 def bfl(counter, x):
-    multiplicator = 99999
-    command = str(multiplicator) + " ** (" + str(multiplicator) + " + " + str(counter) + ")"
+    multiplicator = 99
+    #command = str(multiplicator) + " ** (" + str(multiplicator) + " + " + str(counter) + ")"
+    #command = "pow(" + str(multiplicator) + ", " + str(multiplicator) + " + " + str(counter) + ")"
+    command = "40 - 4.5"
     print(ClusterAPI.execute(counter, command, 1))
     print("\n")
 
@@ -36,10 +38,8 @@ def start():
         counter = 1
 
         while counter <= clusterLenght:
-            # berechnung = _thread.start_new_thread(ClusterAPI.execute, (counter, counter + counter))
             _thread.start_new_thread(bfl, (counter, "x"))
             counter += 1
-            # print(str(berechnung))
 
         print("Calculating. Please wait.")
 

@@ -49,3 +49,30 @@ def execute(clusterComputer, command, highValue):
     else:
         get = client.connect(clusterIndex[(clusterComputer - 1)], 10008, command)
     return get
+
+def clustercheck():
+
+    success = True
+
+    clusterIndexRaw = FileOperations.readFile("clusterIndex.cli")
+    clusterIndex = clusterIndexRaw.split()
+    ClusterCount = len(clusterIndex)
+
+    counter = 0
+
+    while counter < ClusterCount:
+
+        try:
+            get = client.connect(clusterIndex[counter], 10008, "1+1")
+
+            if(int(get) == 2):
+                counter += 1
+            else:
+                counter += 1
+                success = False
+
+        except Exception:
+            counter += 1
+            success = False
+    return success
+

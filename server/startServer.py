@@ -1,4 +1,4 @@
-import server, primes, random
+import sys, os, subprocess,server, primes, random
 
 """
 "startServer.py", to start a new cluster server
@@ -18,6 +18,34 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+def getExperimental():
+    if "--experimental" in sys.argv:
+        return True
+    else:
+        return False
+
+def otfcompile(formula):
+    print("> Generating code ...")
+    stdheader = "#include <iostream>\n#include <cmath>\n\nint main() {\nstd::cout << std::fixed << "
+    stdfooter = " << std::endl;\nreturn 0;\n}"
+
+    code = stdheader + get + stdfooter
+    with open("/tmp/otfoutput.cpp", "w") as file:
+        file.write (code)
+
+    print("> Compiling ...")
+    os.system("g++ /tmp/otfoutput.cpp -O3 -o /tmp/otfexec")
+    os.system("chmod +x /tmp/otfexec")
+
+    print("> Running executable ...")
+    result = subprocess.check_output("/tmp/otfexec", shell=True)
+
+    print("> Deleting OTF files ...")
+    os.system("rm -rf /tmp/otfoutput.cpp /tmp/otfexec")
+
+    print("> Casting result")
+    return float(result)
+
 port = 10008
 pwd = input("Please enter a password to stop the server > ")
 
@@ -36,15 +64,18 @@ while True:
         
         while True:
             get = server.receive(connection)
+            result = ""
             if get != "":
                 print("> Received             '" + get + "'")
             if get[:4] == "close":
                 print("Client attempted to close server")
                 server.send(connection, "Use: close [password]", False)
             if get == "close" + str(pwd):
-                break
+                exit()
             if get:
-                if "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get:
+                if getExperimental():
+                    result = otfcompile(get)
+                elif "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get and "eval" not in get:
                     result = eval(get)
                 else:
                     result = str(random.randint(11111111, 99999999))

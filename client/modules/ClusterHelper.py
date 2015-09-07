@@ -1,3 +1,5 @@
+from modules.API import FileOperations
+import client
 """
 The ClusterAPI interface
 Copyright (C) 2015 Leon Schwalb and Fabian Stein
@@ -59,7 +61,7 @@ def clustercheck():
 
             get = client.connect(clusterIndex[counter], 10008, "1+1")
 
-            if(get == "2"):
+            if(int(float(get)) == 2):
                 print("Server " + clusterIndex[counter] + " OK")
                 counter += 1
 
@@ -70,9 +72,9 @@ def clustercheck():
 
         except Exception:
 
-            print("Server " + clusterIndex[counter] + " FAIL (EXCEPTION IN CODE)")
-            counter += 1
-            success = False
+                print("Server " + clusterIndex[counter] + " FAIL (EXCEPTION IN CODE)")
+                counter += 1
+                success = False
 
     print("Done!")
     return success
