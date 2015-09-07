@@ -24,9 +24,7 @@ def com():
 
 def bfl(counter, x):
     multiplicator = 99
-    #command = str(multiplicator) + " ** (" + str(multiplicator) + " + " + str(counter) + ")"
-    #command = "pow(" + str(multiplicator) + ", " + str(multiplicator) + " + " + str(counter) + ")"
-    command = "40 - 4.5"
+    command = str(multiplicator) + " ** (" + str(multiplicator) + " + " + str(counter) + ")"
     print(ClusterAPI.execute(counter, command, 1))
     print("\n")
 
