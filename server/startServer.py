@@ -18,12 +18,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-def getExperimental():
-    if "--experimental" in sys.argv:
-        return True
-    else:
-        return False
-
 def otfcompile(formula):
     print("> Generating code ...")
     stdheader = "#include <iostream>\n#include <cmath>\n\nint main() {\nstd::cout << std::fixed << "
@@ -50,6 +44,7 @@ port = 10008
 pwd = input("Please enter a password to stop the server > ")
 
 serv = server.init(port, 1)
+callmethod = "python"
 
 print("Server Name/IP:        '" + server.socket.gethostname() + "'")
 print("On port:               '" + str(port) + "'")
@@ -73,7 +68,15 @@ while True:
             if get == "close" + str(pwd):
                 exit()
             if get:
-                if getExperimental():
+                if get == "SETCALLMETHOD<C++>":
+                    print("> Set callmethod to C++")
+                    callmethod = "c++"
+                    result = "OK"
+                elif get == "SETCALLMETHOD<PYTHON>":
+                    print("> Set callmethod to native Python")
+                    callmethod = "python"
+                    result = "OK"
+                elif callmethod == "c++":
                     result = otfcompile(get)
                 elif "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get and "eval" not in get:
                     result = eval(get)

@@ -76,3 +76,15 @@ def clustercheck():
             success = False
     return success
 
+def setCallmethod (clusterServer, callmethod):
+    if callmethod == "c++":
+        execute(clusterServer, "SETCALLMETHOD<C++>", 0)
+    else:
+        execute(clusterServer, "SETCALLMETHOD<PYTHON>", 0)
+
+def setCallmethodAll (callmethod):
+    for server in range(getClusterLenght()):
+        if callmethod == "c++":
+            execute(server, "SETCALLMETHOD<C++>", 0)
+        else:
+            execute(server, "SETCALLMETHOD<PYTHON>", 0)

@@ -1,4 +1,5 @@
 from modules.API import FileOperations
+from modules.API import ClusterAPI
 import client
 """
 The ClusterAPI interface
@@ -19,9 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 def com():
-    return [["clusterinit", "ClusterHelper.clusterinit()"], ["clusterdelete", "ClusterHelper.clusterdelete()"], ["clustercheck", "ClusterHelper.clustercheck()"]]
+    return [["clusterinit", "ClusterHelper.clusterinitUI()"], ["clusterdelete", "ClusterHelper.clusterdeleteUI()"], ["clustercheck", "ClusterHelper.clustercheckUI()"], ["callmethods", "ClusterHelper.callmethodUI()"]]
 
-def clusterinit():
+def clusterinitUI():
     
     ClusterCount = int(input("Please enter the amount of cluster servers in your network > "))
 
@@ -36,14 +37,14 @@ def clusterinit():
 
     print("Done!")
 
-def clusterdelete():
+def clusterdeleteUI():
     really = str(input("This will remove your whole Cluster configuration. Are you sure you will delete it? [y/n] > "))
     if(really == "y"):
         FileOperations.clearFile("clusterIndex.cli")
         print("Configuration removed")
     else: print("Aborted")
 
-def clustercheck():
+def clustercheckUI():
 
     success = True
 
@@ -78,3 +79,19 @@ def clustercheck():
 
     print("Done!")
     return success
+
+def callmethodUI():
+    print("Which nodes callmethod do you want to change? (0 = all)")
+    node = int(input("> "))
+    print("What callmethod should be used? (c++ / python)")
+    method = input("> ")
+    
+    if node == 0:
+        ClusterAPI.setCallmethodAll(method)
+    elif node <= ClusterAPI.getClusterLenght() and node > 0:
+         ClusterAPI.setCallmethod(node - 1, method)
+    else:
+        print("Invalid node")
+
+    print(">> Done")
+        
