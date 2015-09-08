@@ -166,7 +166,11 @@ while inp != "exit":
         # No comment
         elif inp == "clear":
             os.system("clear")
-            
+
+        elif inp == "restart":
+            os.system("python3 ui.py")
+            exit()
+        
         # Copyright
         elif inp == "copyright":
             show_copyright()
