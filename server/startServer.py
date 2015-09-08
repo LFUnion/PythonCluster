@@ -18,6 +18,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+def getCodeDisallowement():
+    if "--deny-c++" in sys.argv:
+        return True
+    else:
+        return False
+
 def otfcompile(formula):
     print("> Generating code ...")
     stdheader = "#include <iostream>\n#include <cmath>\n\nint main() {\nstd::cout << std::fixed << "
@@ -50,50 +56,62 @@ print("Server Name/IP:        '" + server.socket.gethostname() + "'")
 print("On port:               '" + str(port) + "'")
 print()
 
-while True:
-    print("Waiting for a connection...")
-    connection = server.acceptConnections(serv)
-    
-    try:
-        print()
+try:
+    while True:
+        print("Waiting for a connection...")
+        connection = server.acceptConnections(serv)
         
-        while True:
-            get = server.receive(connection)
-            result = ""
-            if get != "":
-                print("> Received             '" + get + "'")
-            if get[:4] == "close":
-                print("Client attempted to close server")
-                server.send(connection, "Use: close [password]", False)
-            if get == "close" + str(pwd):
-                exit()
-            if get:
-                if get == "SETCALLMETHOD<C++>":
-                    print("> Set callmethod to C++")
-                    callmethod = "c++"
-                    result = "OK"
-                elif get == "SETCALLMETHOD<PYTHON>":
-                    print("> Set callmethod to native Python")
-                    callmethod = "python"
-                    result = "OK"
-                elif callmethod == "c++":
-                    result = otfcompile(get)
-                elif "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get and "eval" not in get:
-                    result = eval(get)
+        try:
+            print()
+            
+            while True:
+                get = server.receive(connection)
+                result = ""
+                if get != "":
+                    print("> Received             '" + get + "'")
+                if get[:4] == "close":
+                    print("Client attempted to close server")
+                    server.send(connection, "Use: close [password]", False)
+                if get == "close" + str(pwd):
+                    break
+                    exit()
+                if get:
+                    if get == "SETCALLMETHOD<C++>":
+                        if getCodeDisallowement():
+                            print("> Denied switch to C++ callmethod")
+                            result = "DENIED"
+                        else:
+                            print("> Set callmethod to C++")
+                            callmethod = "c++"
+                            result = "OK"
+                    elif get == "SETCALLMETHOD<PYTHON>":
+                        print("> Set callmethod to native Python")
+                        callmethod = "python"
+                        result = "OK"
+                    elif callmethod == "c++":
+                        result = otfcompile(get)
+                    elif "pwd" not in get and ";" not in get and "os" not in get and "sys" not in get and "exec" not in get and "eval" not in get and "callmethod" not in get:
+                        result = eval(get)
+                    else:
+                        print("> Denied call")
+                        result = str(random.randint(11111111, 99999999))
+                    result = str(result)
+                    print("> Send back            '" + result + "'")
+                    server.send(connection, result, False)
+                    connection.close()
+                    break
+                    
                 else:
-                    result = str(random.randint(11111111, 99999999))
-                result = str(result)
-                print("> Send back            '" + result + "'")
-                server.send(connection, result, False)
-                connection.close()
+                    print()
+                    break
+            if get == "close" + str(pwd):
+                server.send(connection, "Stop server...", False)
+                print("[ SERVER ] Stopping the server ...")
                 break
-                
-            else:
-                print()
-                break
-        if get == "close" + str(pwd):
-            server.send(connection, "Stop server...", False)
-            print("[ SERVER ] Stop the server ...")
-            break
-    except:
-        print("[ SERVER ] ERROR!")
+        except:
+            print("[ SERVER ] ERROR!")
+            
+except KeyboardInterrupt:
+    print("> Closing socket ...")
+    serv.close()
+    exit()

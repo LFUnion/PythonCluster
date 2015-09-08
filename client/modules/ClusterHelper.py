@@ -87,11 +87,14 @@ def callmethodUI():
     method = input("> ")
     
     if node == 0:
-        ClusterAPI.setCallmethodAll(method)
+        result = ClusterAPI.setCallmethodAll(method)
     elif node <= ClusterAPI.getClusterLenght() and node > 0:
-         ClusterAPI.setCallmethod(node - 1, method)
+        result = ClusterAPI.setCallmethod(node - 1, method)
     else:
         print("Invalid node")
 
-    print(">> Done")
+    if result == True:
+        print(">> Done")
+    else:
+        print(">> Error: Server denied")
         

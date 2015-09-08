@@ -78,13 +78,28 @@ def clustercheck():
 
 def setCallmethod (clusterServer, callmethod):
     if callmethod == "c++":
-        execute(clusterServer, "SETCALLMETHOD<C++>", 0)
+        result = execute(clusterServer, "SETCALLMETHOD<C++>", 0)
     else:
-        execute(clusterServer, "SETCALLMETHOD<PYTHON>", 0)
+        result = execute(clusterServer, "SETCALLMETHOD<PYTHON>", 0)
+
+    if result == "OK":
+        return True
+    elif result == "DENIED":
+        return False
+    else:
+        return False
 
 def setCallmethodAll (callmethod):
     for server in range(getClusterLenght()):
         if callmethod == "c++":
-            execute(server, "SETCALLMETHOD<C++>", 0)
+            result = execute(server, "SETCALLMETHOD<C++>", 0)
         else:
-            execute(server, "SETCALLMETHOD<PYTHON>", 0)
+            result = execute(server, "SETCALLMETHOD<PYTHON>", 0)
+
+        if result == "DENIED":
+            print("Server " + str(server) + " denied switching")
+            return False
+        elif result != "OK":
+            print("Server " + str(server) + " ! unknown switching error !")
+            return False
+    return True
