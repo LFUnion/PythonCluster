@@ -9,6 +9,8 @@ the wiki page "Compiling ClusterShell"
 
 You can find documentation in the wiki or the doc/ folder.
 
+Builds can be found on the LFUnion jenkins server at https://0d8c8dd1.ngrok.io
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
