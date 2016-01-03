@@ -32,9 +32,9 @@ standalone:
 	cd build/; mkdir server
 	echo "Compiling ..."
 	echo "	-> Client"
-	cd build/client/; $(NUITKA) --recurse-all --standalone --python-version=3.4 ../../client/ui.py
+	cd build/client/; $(NUITKA) --recurse-all --standalone ../../client/ui.py
 	echo "	-> Server"
-	cd build/server/; $(NUITKA) --recurse-all --standalone --python-version=3.4 ../../server/startServer.py
+	cd build/server/; $(NUITKA) --recurse-all --standalone ../../server/startServer.py
 	mv build/client/ui.dist/* build/client/
 	mv build/server/startServer.dist/* build/server/
 	echo "Removing auto-generated files ..."
@@ -60,9 +60,9 @@ dependand:
 	cd build/; mkdir server
 	echo "Compiling ..."
 	echo "	-> Client"
-	cd build/client/; $(NUITKA) --recurse-all --python-version=3.4 ../../client/ui.py
+	cd build/client/; $(NUITKA) --recurse-all ../../client/ui.py
 	echo "	-> Server"
-	cd build/server/; $(NUITKA) --recurse-all --python-version=3.4 ../../server/startServer.py
+	cd build/server/; $(NUITKA) --recurse-all ../../server/startServer.py
 	echo "Removing auto-generated files ..."
 	rm -r build/client/ui.build/
 	rm -r build/server/startServer.build/
@@ -84,9 +84,9 @@ gencode:
 	cd build/; mkdir server; mkdir server/startServer.build
 	echo "Generating C++ Code ..."
 	echo "	-> Client"
-	- cd build/client/; $(NUITKA) --recurse-all --generate-c++-only --python-version=3.4 ../../client/ui.py
+	- cd build/client/; $(NUITKA) --recurse-all --generate-c++-only ../../client/ui.py
 	echo "	-> Server"
-	- cd build/server/; $(NUITKA) --recurse-all --generate-c++-only --python-version=3.4 ../../server/startServer.py
+	- cd build/server/; $(NUITKA) --recurse-all --generate-c++-only ../../server/startServer.py
 	echo "Moving files into right directory ..."
 	mv build/client/ui.build/* build/client/
 	rmdir build/client/ui.build
