@@ -1,6 +1,8 @@
 Python Cluster
 ==============
 
+[![Build Status](https://0d8c8dd1.ngrok.io/job/PythonCluster/badge/icon)](https://0d8c8dd1.ngrok.io/job/PythonCluster/)
+
 Python Cluster is a script to setup and run a computer cluster.
 Copyright (c) 2014 - 2015 Leon Schwalb and Fabian Stein.
 
